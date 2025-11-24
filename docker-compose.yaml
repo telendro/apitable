@@ -11,6 +11,16 @@ services:
       - "${ENV_FILE:-.env}"
     networks:
       - apitable
+    networks:
+      - dokploy-network
+
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.apitable.rule=Host(`api.shats.cl`)
+      - traefik.http.routers.apitable.entrypoints=websecure
+      - traefik.http.routers.apitable.tls.certresolver=letsencrypt
+      - traefik.http.services.apitable.loadbalancer.server.port=8080
+
 
   imageproxy-server:
     image: ${IMAGE_REGISTRY}/${IMAGE_IMAGEPROXY_SERVER}

@@ -12,6 +12,7 @@ services:
 
     networks:
       - dokploy-network
+      - apitable
 
     labels:
       - traefik.enable=true
